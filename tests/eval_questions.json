@@ -1,0 +1,23 @@
+[
+  {"id": 1, "q": "中芯国际2025年营业收入是多少？", "channel": "sql", "expect_number": "673.23", "expect_unit": "亿元"},
+  {"id": 2, "q": "比亚迪2025年归属于上市公司股东的净利润是多少？", "channel": "sql", "expect_number": "326.19", "expect_unit": "亿元"},
+  {"id": 3, "q": "宁德时代2025年末总资产是多少？", "channel": "sql", "expect_number": "9748.28", "expect_unit": "亿元"},
+  {"id": 4, "q": "中微公司2025年研发投入占营业收入的比例是多少？", "channel": "sql", "expect_number": "30.23", "expect_unit": "%"},
+  {"id": 5, "q": "比亚迪2025年基本每股收益是多少？", "channel": "sql", "expect_number": "3.58", "expect_unit": "元/股"},
+  {"id": 6, "q": "中芯国际2024年营业收入是多少？", "channel": "sql", "expect_number": "577.96", "expect_unit": "亿元"},
+  {"id": 7, "q": "宁德时代2024年营业收入是多少？", "channel": "sql", "expect_number": "3620.13", "expect_unit": "亿元"},
+  {"id": 8, "q": "中芯国际2025年第一季度营业收入是多少？", "channel": "sql", "expect_number": "163.01", "expect_unit": "亿元"},
+  {"id": 9, "q": "汇川科技2025年第四季度营业收入是多少？", "channel": "sql", "expect_number": "134.42", "expect_unit": "亿元"},
+  {"id": 10, "q": "湖南裕能2025年经营活动现金流量净额是正还是负？具体多少？", "channel": "sql", "expect_number": "-15.46", "expect_unit": "亿元"},
+  {"id": 11, "q": "15家公司里2025年营业收入最高的是哪家？", "channel": "sql", "expect_keyword": "比亚迪"},
+  {"id": 12, "q": "2025年营业收入排名前三的公司？", "channel": "sql", "expect_keyword": "宁德时代"},
+  {"id": 13, "q": "2025年加权平均净资产收益率最高的是哪家？", "channel": "sql", "expect_keyword": "宁德时代"},
+  {"id": 14, "q": "2025年营业收入同比增速最快的是哪家？", "channel": "sql", "expect_keyword": "德福科技"},
+  {"id": 15, "q": "中芯国际2025年末普通股股东总数是多少？", "channel": "sql", "expect_number": "322,045", "expect_unit": "户"},
+  {"id": 16, "q": "中芯国际2025年毛利率是多少？", "channel": "rag", "expect_reject": true},
+  {"id": 17, "q": "比亚迪2025年存货是多少？", "channel": "rag", "expect_reject": true},
+  {"id": 18, "q": "宁德时代2025年研发费用是多少？", "channel": "rag", "expect_reject": true},
+  {"id": 19, "q": "锐科激光的主营业务是什么？", "channel": "rag", "expect_keyword": "激光"},
+  {"id": 20, "q": "中芯国际2025年在全球晶圆代工行业的排名？", "channel": "rag", "expect_keyword": "第二"},
+  {"id": 21, "q": "功率GaN器件2024至2030年的市场规模预测是多少？", "channel": "rag", "expect_number": "29 亿美元"}
+]

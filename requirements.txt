@@ -1,0 +1,33 @@
+# 财报摘要 RAG 系统 · 直接依赖
+# 安装：pip install -r requirements.txt
+# 注：Docker 环境请先装 CPU 版 torch（见 Dockerfile）
+
+fastapi==0.139.2                         # Web 框架
+uvicorn==0.38.0                          # ASGI 服务器
+langchain-core==1.4.8                    # LCEL 编排
+langchain-openai==1.3.3                  # 云端 LLM 客户端
+langchain-ollama==1.1.0                  # 本地 LLM 客户端
+langchain-huggingface==1.1.0             # HuggingFace 向量化封装
+pymilvus==3.0.2                          # Milvus 客户端
+milvus-lite==3.2.2                       # Milvus 本地单文件模式
+sentence-transformers==5.6.1             # 向量化模型加载
+FlagEmbedding==1.4.0                     # Reranker 精排
+transformers==4.44.2                     # 模型加载
+tokenizers==0.19.1                       # 分词
+huggingface-hub==0.36.0                  # 模型仓库
+safetensors==0.8.0                       # 权重格式
+# torch 由 Dockerfile 单独装 CPU 版（体积小 10 倍）；本地直接 pip install torch
+# torch==2.6.0+cu126                       # 深度学习运行时
+beautifulsoup4==4.15.0                   # HTML 表格解析
+lxml==6.1.1                              # 解析器
+jieba==0.42.1                            # 中文分词
+numpy==2.4.6                             # 数值计算
+redis==4.5.5                             # Redis 客户端
+PyMySQL==1.2.0                           # MySQL 客户端
+python-jose==3.5.0                       # JWT
+passlib==1.7.4                           # 密码哈希
+bcrypt==5.0.0                            # bcrypt 后端
+cryptography==49.0.0                     # 加密
+python-dotenv==1.2.2                     # .env 加载
+requests==2.34.2                         # HTTP
+tqdm==4.68.3                             # 进度条
