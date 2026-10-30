@@ -1,0 +1,42 @@
+# Milvus standalone —— 单容器版（嵌入式 etcd + 本地文件存储，不需要 etcd / minio）
+#
+# 为什么不用官方三容器 compose：
+#   官方版依赖 quay.io/coreos/etcd 和 minio/minio，而 MinIO 在 2025 年撤掉了 Docker Hub 镜像
+#   （pull access denied，quay/bitnami/旧 tag 全部失败），Milvus standalone 又离不开 S3 兼容存储。
+#   Milvus 2.5 支持 etcd 内嵌 + 本地文件存储，单容器即可跑通，开发/演示。
+#
+# 用法：
+#   docker compose -f docker-compose.milvus.yml up -d
+#   docker compose -f docker-compose.milvus.yml logs -f milvus      # 看启动日志
+#   docker compose -f docker-compose.milvus.yml down                # 停止（数据保留在 ./volumes/milvus）
+#
+# 切到 standalone 后端：
+#   .env 里把 MILVUS_ENDPOINT 改成 http://127.0.0.1:19530
+#   python create_data/build_index.py --milvus                      # 重建索引
+#
+# 说明：本地默认仍用 Milvus Lite（db/milvus.db，零依赖、无需 Docker），
+#       这个 compose 是可选的 standalone 方案（支持水平扩展、分区、Attu 可视化）。
+
+services:
+  milvus:
+    container_name: milvus-standalone
+    image: milvusdb/milvus:v2.5.4
+    command: ["milvus", "run", "standalone"]
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      ETCD_USE_EMBED: "true"
+      ETCD_DATA_DIR: /var/lib/milvus/etcd
+      COMMON_STORAGETYPE: local
+      COMMON_STORAGEPATH: /var/lib/milvus/data
+    volumes:
+      - ./volumes/milvus:/var/lib/milvus
+    ports:
+      - "19530:19530"
+      - "9091:9091"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
+      interval: 30s
+      start_period: 90s
+      timeout: 20s
+      retries: 3
