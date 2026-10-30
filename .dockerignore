@@ -1,0 +1,28 @@
+# 本地数据与状态（运行时挂载，不进镜像）
+db/
+volumes/
+company_chroma/
+_analysis/
+
+# 环境变量（用 --env-file 或 -e 注入）
+.env
+.env.*
+
+# 版本控制与 IDE
+.git/
+.gitignore
+.idea/
+.vscode/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 文档与素材（镜像里用不到）
+docs/
+*.png
+*.jpg
+*.jpeg
+
+# 依赖快照（pip_only.txt 是本机全量导出，镜像构建不需要）
+pip_only.txt
+conda_all.txt
