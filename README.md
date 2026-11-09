@@ -3,7 +3,7 @@
 面向 15 家 A 股半导体 / 新能源产业链公司的年报摘要问答系统。
 **数值走结构化查询（可校验），叙述走混合检索（可引用）**，数值题不经过生成模型。
 
-> 表格解析 → 结构化入库 → 意图识别 → 双链路检索 → 答案生成，全流程可复现。
+> 双路取表 → 对账入库 → 意图识别 → 双链路检索 → 答案生成，全流程可复现。
 
 ## 核心特性
 
@@ -14,7 +14,8 @@
 | **意图：模型提议** | 本地 4B 小模型做 Schema Linking，只看枚举清单，输出受限 DSL，不碰 SQL 与数值 |
 | **路由：代码裁决** | 白名单校验、相对时间换算、字段一致性降级，模型不可用时自动回退规则 |
 | **答案可溯源** | 每个答案标注「哪份文件、第几张表」或「哪一节」，由代码追加而非模型生成 |
-| **表格三重校验** | 「四季度之和 = 年度值」硬约束，45/45 通过 |
+| **双路交叉验证** | OCR 规则解析 + VLM 读表两条独立路径，按「指标 + 期间」对账；**665/681 一致，1 条模型读错被拦下** |
+| **硬校验** | 「四季度之和 = 年度值」恒等式，45/45 通过 |
 
 ## 架构
 
@@ -63,17 +64,37 @@ MILVUS_COLLECTION = "fin_report_chunks"
 
 # 意图识别（可选，关掉则走纯规则路由）
 INTENT_MODE = "rule"
+
+# VLM 取表（可选，留空则只用 OCR 单路）
+VLM_MODEL = "qwen3.8-max-0902"
 ```
 
 ### 3. 构建索引
 
 ```bash
-# 结构化事实 → SQLite（681 条）
+# 结构化事实 → SQLite（双路取数 + 对账）
 python create_data/build_index.py --sqlite
 
-# 文本与表格 → Milvus（512 chunks）
+# 文本与表格 → Milvus（514 chunks）
 python create_data/build_index.py --milvus
 ```
+
+表格入库走两条**互不依赖**的路：
+
+```
+每份财报
+  ├─ OCR 路  md 里的 HTML 表格 → 网格展开 / 多组表头 / 断行修复 → 规则取数
+  └─ VLM 路  PDF → PyMuPDF 检出表格 bbox → 裁图（跨页自动拼接）→ 视觉模型读数
+                    ↓
+       按 (指标, 期间) 对账
+         ├─ 一致     → source = both
+         ├─ 只有一路 → source = ocr / vlm
+         └─ 不一致   → 写入 fact_conflict，**不入库**
+```
+
+- **没配 VLM 也能跑**：`VLM_MODEL` 留空时自动退化为 OCR 单路，结果照样入库。
+- **表格裁图**是生成物，落在 `new_Data/<公司>/tables/`（已 gitignore）。没有裁图时会自动从 PDF 生成，15 家约 10 秒。
+- **模型读数缓存**在 `new_Data/<公司>/vlm_facts.json`，命中就不会再调模型。怀疑某条读错，直接改这个 json 重跑即可，不用重裁图也不用重新调用。
 
 ### 4. 启动
 
@@ -87,8 +108,7 @@ python main.py     # http://127.0.0.1:8000
 
 ```bash
 python tests/test_intent_dsl.py           # 意图裁决器 24 条（不需模型，最快）
-python create_data/test_table_parser.py   # 表格解析
-python create_data/test_chunker.py        # 切块
+python create_data/test_create_data.py    # 表格解析 + 切块
 python tests/test_retrieval.py            # 检索 Recall / MRR（需 Milvus）
 python tests/test_e2e.py                  # 端到端 21 题（需 Milvus + LLM）
 ```
@@ -98,8 +118,9 @@ python tests/test_e2e.py                  # 端到端 21 题（需 Milvus + LLM�
 | 指标 | 结果 |
 |---|---|
 | 表格解析硬校验（四季度之和 = 年度） | **45/45** |
+| 双路对账（OCR + VLM） | **665/681 一致**，1 条冲突被拦下 |
 | 结构化事实 | **681 条**（年度/时点 441 + 季度 240） |
-| 切块 | **512 块** |
+| 切块 | **514 块** |
 | 检索 Recall@5 / MRR@10 | **100% / 0.944** |
 | 意图裁决单测 | **24/24** |
 | 端到端 21 题（含 3 道越界拒答） | **21/21** |
@@ -129,16 +150,17 @@ chat/
     TableQuery    参数化 SQL + 确定性渲染 + 溯源
     MilvusRetriever 双链路检索 + RRF + 精排
     datascope     数据覆盖范围推导
-create_data/      离线构建：表格解析、切块、建索引
+create_data/      离线构建：OCR 路解析、VLM 路裁表与读数、对账、切块
 ai/               embedding / reranker / LLM / Milvus 客户端
 tests/            评测集与测试脚本
-new_Data/         15 份年报摘要（md + 图片）
+new_Data/         15 份年报摘要（md + PDF 原件 + 图片）
 docs/             设计文档
 ```
 
 ## 文档
 
 - [架构详解](docs/交付物/02-框架设计详解.md) — 调用链、裁决规则、代码地图
+- [交叉验证结果](docs/交付物/05-交叉验证结果.md) — 双路对账明细、冲突判定依据
 - [速览](docs/PROJECT.md) — 核心设计与实测结果
 - [本地模型部署](docs/finqa4b-deploy.md) — 4B 小模型的下载、量化、导入
 
