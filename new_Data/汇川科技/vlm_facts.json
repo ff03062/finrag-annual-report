@@ -1,0 +1,348 @@
+{
+  "facts": [
+    {
+      "metric": "total_assets",
+      "period": "2025年末",
+      "value": 71314393635.15,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "total_assets",
+      "period": "2024年末",
+      "value": 57178824244.41,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "total_assets",
+      "period": "2023年末",
+      "value": 48957564055.31,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "net_assets_attributable",
+      "period": "2025年末",
+      "value": 35352991488.32,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "net_assets_attributable",
+      "period": "2024年末",
+      "value": 27994377858.21,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "net_assets_attributable",
+      "period": "2023年末",
+      "value": 24481893916.24,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "revenue",
+      "period": "2025年",
+      "value": 45104844200.13,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "revenue",
+      "period": "2024年",
+      "value": 37040952138.72,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "revenue",
+      "period": "2023年",
+      "value": 30419925397.64,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "net_profit_attributable",
+      "period": "2025年",
+      "value": 5050002089.89,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "net_profit_attributable",
+      "period": "2024年",
+      "value": 4285493340.7,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "net_profit_attributable",
+      "period": "2023年",
+      "value": 4741863347.2,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "net_profit_deducted",
+      "period": "2025年",
+      "value": 4950505396.54,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "net_profit_deducted",
+      "period": "2024年",
+      "value": 4035832165.85,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "net_profit_deducted",
+      "period": "2023年",
+      "value": 4071177195.45,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "ocf_net",
+      "period": "2025年",
+      "value": 6681025417.16,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "ocf_net",
+      "period": "2024年",
+      "value": 7200440164.32,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "ocf_net",
+      "period": "2023年",
+      "value": 3369915897.12,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "eps_basic",
+      "period": "2025年",
+      "value": 1.87,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "eps_basic",
+      "period": "2024年",
+      "value": 1.6,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "eps_basic",
+      "period": "2023年",
+      "value": 1.78,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "eps_diluted",
+      "period": "2025年",
+      "value": 1.85,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "eps_diluted",
+      "period": "2024年",
+      "value": 1.6,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "eps_diluted",
+      "period": "2023年",
+      "value": 1.78,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "roe_weighted",
+      "period": "2025年",
+      "value": 16.34,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "roe_weighted",
+      "period": "2024年",
+      "value": 16.52,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "roe_weighted",
+      "period": "2023年",
+      "value": 21.66,
+      "unit": "元",
+      "page": 7,
+      "table": 1
+    },
+    {
+      "metric": "revenue",
+      "period": "2025Q1",
+      "value": 8977911730.21,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "revenue",
+      "period": "2025Q2",
+      "value": 11531446052.78,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "revenue",
+      "period": "2025Q3",
+      "value": 11153248686.7,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "revenue",
+      "period": "2025Q4",
+      "value": 13442237730.44,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "net_profit_attributable",
+      "period": "2025Q1",
+      "value": 1322825045.35,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "net_profit_attributable",
+      "period": "2025Q2",
+      "value": 1645563001.39,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "net_profit_attributable",
+      "period": "2025Q3",
+      "value": 1285742607.98,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "net_profit_attributable",
+      "period": "2025Q4",
+      "value": 795871435.17,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "net_profit_deducted",
+      "period": "2025Q1",
+      "value": 1233790310.77,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "net_profit_deducted",
+      "period": "2025Q2",
+      "value": 1437652657.11,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "net_profit_deducted",
+      "period": "2025Q3",
+      "value": 1216661407.06,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "net_profit_deducted",
+      "period": "2025Q4",
+      "value": 1062401021.6,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "ocf_net",
+      "period": "2025Q1",
+      "value": 262550980.59,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "ocf_net",
+      "period": "2025Q2",
+      "value": 2757516351.66,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "ocf_net",
+      "period": "2025Q3",
+      "value": 910591721.41,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    },
+    {
+      "metric": "ocf_net",
+      "period": "2025Q4",
+      "value": 2750366363.5,
+      "unit": "元",
+      "page": 7,
+      "table": 2
+    }
+  ]
+}

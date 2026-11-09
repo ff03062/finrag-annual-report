@@ -20,6 +20,7 @@ safetensors==0.8.0                       # 权重格式
 # torch==2.6.0+cu126                       # 深度学习运行时
 beautifulsoup4==4.15.0                   # HTML 表格解析
 lxml==6.1.1                              # 解析器
+pymupdf==1.28.2                          # PDF 表格检测与裁图（VLM 路）
 jieba==0.42.1                            # 中文分词
 numpy==2.4.6                             # 数值计算
 redis==4.5.5                             # Redis 客户端
