@@ -265,8 +265,20 @@ def doc_label(raw_path: str, company: str = "") -> str:
     return name
 
 
+def _locator(row: dict) -> str:
+    """一条事实在原文里的位置。页码只有 VLM 路能给出，md 里没有页码。"""
+    page, table = row.get("source_page"), row.get("source_table")
+    if page and table:
+        return f"第 {page} 页第 {table} 张表"
+    if page:
+        return f"第 {page} 页"
+    if table:
+        return f"第 {table} 张表"
+    return ""
+
+
 def lineage_of(result: dict) -> str:
-    """溯源信息：文档名 + 表序号。
+    """溯源信息：文档名 + 位置。
 
     跨公司对比时各行可能来自不同文件，去重后最多列 3 个，其余归并为「等 N 份」。
     """
@@ -275,8 +287,8 @@ def lineage_of(result: dict) -> str:
         doc = doc_label(r.get("source_doc") or "", r.get("company") or "")
         if not doc:
             continue
-        table = r.get("source_table")
-        item = f"{doc} 第 {table} 张表" if table else doc
+        locator = _locator(r)
+        item = f"{doc} {locator}" if locator else doc
         if item not in items:
             items.append(item)
     if not items:
@@ -308,11 +320,12 @@ def query_growth(metric_code: str, base_label: str, curr_label: str,
                MAX(CASE WHEN period_label = ? THEN value_yuan END) AS base_val,
                MAX(CASE WHEN period_label = ? THEN value_yuan END) AS curr_val,
                MAX(CASE WHEN period_label = ? THEN source_doc END) AS source_doc,
+               MAX(CASE WHEN period_label = ? THEN source_page END) AS source_page,
                MAX(CASE WHEN period_label = ? THEN source_table END) AS source_table
         FROM fact
         WHERE metric_code = ? AND period_label IN (?, ?)
     """
-    params: list = [base_label, curr_label, curr_label, curr_label,
+    params: list = [base_label, curr_label, curr_label, curr_label, curr_label,
                     metric_code, base_label, curr_label]
     if company:
         sql += " AND company = ?"
@@ -333,6 +346,7 @@ def query_growth(metric_code: str, base_label: str, curr_label: str,
                 "curr_yuan": curr,
                 "growth_pct": (curr - base) / abs(base) * 100,
                 "source_doc": r["source_doc"],
+                "source_page": r["source_page"],
                 "source_table": r["source_table"],
             })
 

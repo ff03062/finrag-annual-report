@@ -8,6 +8,10 @@ docs/交付物/03-简历版.md
 db/
 *.db
 create_data/cache/
+# 表格裁图：从 PDF 重新生成约 10 秒，不入库避免仓库膨胀
+new_Data/*/tables/
+# 注意 new_Data/*/vlm_facts.json 是**故意保留**的：模型读数缓存，
+# 提交后别人 clone 下来不必再花钱调用视觉模型
 
 # ── Milvus 本地数据卷（百 MB 级，本地起服务时生成）──────────
 volumes/

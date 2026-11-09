@@ -1,8 +1,6 @@
 from functools import lru_cache
 
 from langchain_openai import ChatOpenAI
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import PromptTemplate
 from dotenv import load_dotenv
 import os
 
@@ -37,6 +35,7 @@ def _read_windows_env(name):
         except OSError:
             continue
     return None
+
 
 
 def _api_key():
@@ -119,27 +118,3 @@ def schema_llm():
         num_ctx=int(os.getenv("LLM_NUM_CTX", "16384")),
         client_kwargs={"timeout": int(os.getenv("INTENT_TIMEOUT", "30"))},
     )
-
-
-def summarize_table(table_content: str) -> str:
-    """
-    使用 LLM 生成表格摘要（仅用于规则解析失败的复杂表格）
-    """
-    llm = chat_llm()
-    
-    prompt = PromptTemplate.from_template("""
-你是一个金融数据分析师。请简要总结以下表格的核心信息。
-
-要求：
-- 用1-2句话概括表格主要内容
-- 突出关键数据或趋势
-- 不要逐行描述
-
-表格内容：
-{table_content}
-
-摘要：
-""")
-    
-    chain = prompt | llm | StrOutputParser()
-    return chain.invoke({"table_content": table_content})

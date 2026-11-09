@@ -33,9 +33,7 @@ COMPLIANCE_RULES = """参考资料里会出现「适用 / 不适用 / 是 / 否 
 
 PROMPT_TEMPLATE = """你是一名严谨的财报分析助手。请只根据下面提供的资料回答用户问题。
 
-""" + COMPLIANCE_RULES + """
-
-回答规则：
+""" + COMPLIANCE_RULES + """回答规则：
 1. 数字必须来自「结构化数据」或「文本资料」，不要凭空编造。
 2. 「结构化数据」与「文本资料」冲突时，以结构化数据为准（正文数字常有四舍五入）。
 3. 金额换算成「亿元」时保留 2 位小数，并注明原始单位。
@@ -53,7 +51,8 @@ PROMPT_TEMPLATE = """你是一名严谨的财报分析助手。请只根据下�
 
 用户问题：{question}
 {brief_hint}
-回答："""
+回答：
+"""
 
 
 def _clean_history(messages, max_turns: int = MAX_HISTORY_TURNS):

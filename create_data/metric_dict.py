@@ -137,10 +137,12 @@ for _code, _meta in METRICS.items():
 
 
 def resolve_metric(label: str) -> str | None:
-    """行名 / 用户口语 → metric_code；不命中返回 None。"""
+    """行名 / 口语 / code → metric_code；不命中返回 None。"""
     key = normalize_label(label)
     if not key or key in NON_METRIC_LABELS:
         return None
+    if key in METRICS:
+        return key
     return _ALIAS_TO_CODE.get(key)
 
 
